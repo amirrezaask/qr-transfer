@@ -7,12 +7,17 @@ import (
 	"net"
 	"net/http"
 	"os"
+	"strings"
 
 	"github.com/fatih/color"
 	"github.com/mdp/qrterminal"
 )
 
-const ()
+func replaceChar(fileName string) string {
+	s := strings.Replace(fileName, " ", "%20", -1)
+	//s = strings.Replace(fileName, ".", "%2E", -1)
+	return s
+}
 
 func getIP() (string, error) {
 	addrs, err := net.InterfaceAddrs()
@@ -35,6 +40,7 @@ func main() {
 		log.Fatalln("need a file name ")
 	}
 	fileName := os.Args[1]
+	fileName = replaceChar(fileName)
 	//get ip
 	ip, err := getIP()
 	if err != nil {
